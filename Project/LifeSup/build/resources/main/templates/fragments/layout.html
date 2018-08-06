@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.css}"/>
+
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UET Point</title>
+</head>
+<body>
+<div id="wrapper" class="relative" style="background-color:#ecf8ec;">
+    <th:block th:replace="fragments/header :: header_info"/>
+    <div class="container-fluid">
+        <div class="wrapper-main">
+            <div class="row">
+                <div>
+                    <div class="display-content">
+                        <th:block layout:fragment="display-content">
+                        </th:block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <th:block th:replace="fragments/footer :: footer_info"/>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/vendor/axios/axios.js}"></script>
+<script th:src="@{/vendor/sweetalert/sweetalert.js}"></script>
+<script th:src="@{/vendor/nprogress/nprogress.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>

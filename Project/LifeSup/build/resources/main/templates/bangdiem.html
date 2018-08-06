@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>View Point</title>
+</head>
+<body>
+<div layout:fragment="display-content" th:remove="tag">
+    <div class="container text-center">
+        <h3>Bảng điểm môn: <span th:text="${vm.getInfo().getLopHoc().getTenLop()}"></span></h3>
+        <object th:data="${vm.getInfo().getLink()}" type="" style="width: 100%; height: 800px;"
+                class="text-center"></object>
+    </div>
+
+</div>
+</body>
+</html>

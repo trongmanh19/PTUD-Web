@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<div layout:fragment="display-content" th:remove="tag">
+    <div class="container-fluid">
+        <div id="data"></div>
+        <section>
+            <h1>Admin - management page</h1>
+            <div class="label-success" style="padding: 5px 15px; color: #fff;">
+                <span th:text="${vm.getMessageTotalBangDiem()}"></span>
+            </div>
+            <p style="margin-top: 10px;">
+                <button class="btn btn-primary" id="btn-new-bangdiem">Thêm bảng điểm</button>
+            </p>
+        </section>
+    </div>
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bảng điểm</th>
+                    <th>Lớp môn học</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bangdiem: ${vm.getListPagingBangDiem()}">
+                    <td>
+                        <p th:text="${bangdiem.getId()}"></p>
+                    </td>
+                    <td>
+                        <!--<a th:href="@{'/product/detail/' + ${product.getId()}}">-->
+                        <a>
+                            <object th:data="${bangdiem.getLink()}" type="" style="width: 50px; height: 80px;"
+                                    class="text-center"></object>
+                        </a>
+                        <!--<p th:text="${product.getName()}"></p>-->
+                    </td>
+                    <td>
+                        <p th:text="${bangdiem.getLophoc().getTenLop()}"></p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-edit"
+                                th:attr="data-bangdiem=${bangdiem.getId()}">Edit
+                        </button>
+                        <button type="button" class="btn btn-danger btn-delete"
+                                th:attr="data-bangdiem=${bangdiem.getId()}">Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination" th:if="${0 < vm.getTotalPagingItems()}">
+            <th:block th:each="indexPage : ${#numbers.sequence(1, vm.getTotalPagingItems(), 1)}">
+                <li class="active" th:if="${indexPage == vm.getCurrentPage()}">
+                    <a th:href="@{'/admin/bangdiem-management?pageNumber=' + ${indexPage}}"><span th:text="${indexPage}"></span></a>
+                </li>
+                <li th:unless="${indexPage == vm.getCurrentPage()}">
+                    <a th:href="@{'/admin/bangdiem-management?pageNumber=' + ${indexPage}}"><span th:text="${indexPage}"></span></a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+    <div id="modal-create-bangdiem" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới bảng điểm</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="img-select-block margin-bottom-15">
+                        <label>Bảng điểm</label><br/>
+                        <!--<img id="preview-product-img" th:src="@{/img/default-img.jpg}"/>-->
+                        <input type='file' id="input-select-img-attach"/>
+                    </div>
+
+                    <div class="form-group margin-bottom-15">
+                        <label for="input-bangdiem-lophoc">Lớp môn học:</label>
+                        <select class="form-control" id="input-bangdiem-lophoc">
+                            <option th:each="lophoc : ${vm.getListLopHoc()}"
+                                    th:value="${lophoc.getId()}" th:text="${lophoc.getTenLop()}"></option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-default btn-primary btn-save-bangdiem">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

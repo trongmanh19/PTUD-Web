@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+<div layout:fragment="display-content" th:remove="tag">
+    <div class="form-group" style="width: 50%; padding-left: 70px;">
+        <input type="text" class="form-control" placeholder="Search">
+    </div>
+
+    <div class="container">
+        <div class="label-primary" style="padding: 5px 15px; color: #fff; margin-bottom: 10px;">
+            <span th:text="${vm.getMessageTotalLopMonHoc()}"></span>
+        </div>
+        <div class="panel panel-info" th:each="bangdiemlop: ${vm.getListLopHoc()}">
+            <div class="panel-heading">
+                <a th:href="@{'/view-point/detail/' + ${bangdiemlop.getBangDiemId()}}">
+                    <h5 th:text="${bangdiemlop.getLopHocName()}"></h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
